@@ -1,6 +1,3 @@
-#ifndef __POLINOMIO__HXX__
-#define __POLINOMIO__HXX__
-
 // -------------------------------------------------------------------------
 template < class S > 
 Polinomio<S>::
@@ -26,7 +23,7 @@ void Polinomio<S>::FijarCoeficiente( unsigned int grado, const S& coeficiente )
 
 // -------------------------------------------------------------------------
 template < class S > 
-Polinomio<S>& Polinomio<S>::operator+( const Polinomio< S >& der ) const
+Polinomio<S> Polinomio<S>::operator+( const Polinomio< S >& der ) const
 {
   Polinomio<S> resultado;
 
@@ -37,7 +34,7 @@ Polinomio<S>& Polinomio<S>::operator+( const Polinomio< S >& der ) const
 
 // -------------------------------------------------------------------------
 template < class S > 
-Polinomio<S>& Polinomio<S>::operator*( const Polinomio< S >& der ) const
+Polinomio<S> Polinomio<S>::operator*( const Polinomio< S >& der ) const
 {
   Polinomio<S> resultado;
 
@@ -56,7 +53,4 @@ S Polinomio<S>::operator()( const S& x ) const
 
   return resultado;
 }
-
-#endif // __POLINOMIO__HXX__
-
 // eof - Polinomio.hxx

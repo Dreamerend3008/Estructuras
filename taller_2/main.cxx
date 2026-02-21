@@ -4,6 +4,8 @@
 #include <sstream>
 #include <vector>
 
+#include "Polinomio.h"
+
 // -------------------------------------------------------------------------
 typedef double TEscalar;
 typedef Polinomio<TEscalar> TPolinomio;
@@ -18,7 +20,7 @@ int main( int argc, char* argv[] )
     return( 1 );
 
   }
-  std::string archEntrada = argv[ 2 ];
+  std::string archEntrada = argv[ 1 ];
 
   // Abrir archivo de texto
   std::ifstream entrada( archEntrada );
@@ -35,7 +37,7 @@ int main( int argc, char* argv[] )
   // Leer la cantidad de polinomios
   std::string lineaEntr;
   std::getline( entrada, lineaEntr );
-  unsigned int nPolys = std::atoi( lineaEntr );
+  unsigned int nPolys = std::stoi( lineaEntr );
 
   // Leer polinomios
   for( unsigned int p = 0; p < nPolys; ++p )
@@ -53,12 +55,12 @@ int main( int argc, char* argv[] )
     std::string token;
     while( tokens >> token )
     {
-      unsigned int grado = std::atoi( token );
+      unsigned int grado = std::stoi( token );
       tokens >> token;
       TEscalar coeficiente = std::atof( token.c_str( ) );
 
       // Actualizar Polinomio
-      polys[ p ]->FijarCoeficiente( grado, coeficiente );
+      polys[ p ].FijarCoeficiente( grado, coeficiente );
 
     }
     std::cout << "Entrada " << p << " = " << polys[ p ] << std::endl;
@@ -101,7 +103,7 @@ int main( int argc, char* argv[] )
       case 'P':
       {
         unsigned int id;
-        TScalar x;
+        TEscalar x;
         tokens >> id >> x;
         std::cout
           << "Polinomio (" << id << ", " << x << ") = "
@@ -118,7 +120,7 @@ int main( int argc, char* argv[] )
   }
 
   // Cerrar archivo de texto
-  ( *entrada ).close( );
+  ( entrada ).close( );
 
   return( 0 );
 }

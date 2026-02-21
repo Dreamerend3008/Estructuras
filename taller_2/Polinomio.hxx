@@ -38,8 +38,18 @@ Polinomio<S> Polinomio<S>::operator*( const Polinomio< S >& der ) const
 {
   Polinomio<S> resultado;
 
-  // TODO #2
-
+  int grado1 = (this->size() > 0) ? this->size() - 1 : 0;
+  int grado2 = (der.size() > 0) ? der.size() - 1 : 0;
+  int gradoResultado = grado1 + grado2;
+  resultado.resize(gradoResultado + 1, S(0));  // Pre-size the result
+  for(int i=0;i<=grado1;i++){
+      S coef1 = (*this)[i];
+      for(int j=0;j<=grado2;j++){
+          S coef2 = der[j];  // Fixed: was der[i]
+          S tmp = resultado[i+j];
+          resultado.FijarCoeficiente(i+j, tmp + (coef1*coef2));
+      }
+  }
   return resultado;
 }
 

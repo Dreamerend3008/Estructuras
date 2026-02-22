@@ -47,7 +47,7 @@ private:
   Node<T> *next_;
 };
   
-template <class T>
+template <class T>  
 class LinkedList {
 public:
   LinkedList () : head_(0) {};
@@ -62,7 +62,6 @@ public:
   int remove (const T &item_to_remove) {
     Node<T> *marker = head_;
     Node<T> *temp = 0;  // temp points to one behind as we iterate
-
     while (marker != 0) {
       if (marker->value() == item_to_remove) {
         if (temp == 0) { // marker is the first element in the list
@@ -71,19 +70,19 @@ public:
             delete marker; // marker is the only element in the list
             marker = 0;
           } else {
-            head_ = new Node<T>(marker->value(), marker->next());
+            head_ = marker->next() ; // no tengo que crear un nuevo nodo 
             delete marker;
             marker = 0;
           }
           return 0;
         } else {
           temp->next (marker->next());
-          delete temp;
-          temp = 0;
+          delete marker;
+          marker = 0;
           return 0;
         }
       }
-      marker = 0;  // reset the marker
+      //marker = 0;  // SOLUCION
       temp = marker;
       marker = marker->next();
     }
@@ -103,9 +102,9 @@ private:
   void delete_nodes (void) {
     Node<T> *marker = head_;
     while (marker != 0) {
-      Node<T> *temp = marker;
+      Node<T> *temp = marker->next();
       delete marker;
-      marker = temp->next();
+      marker = temp;
     }
   }
         
